@@ -31,10 +31,11 @@ OutputMode mode = delimited;
 #define RFM95_INT 7
 */
 
-/* for feather m0  */
+/* for feather m0  
 #define RFM95_CS 8
 #define RFM95_RST 4
 #define RFM95_INT 3
+*/
 
 /* for shield 
 #define RFM95_CS 10
@@ -60,16 +61,22 @@ OutputMode mode = delimited;
 #define RFM95_INT     4    // "C"
 */
 
+/* Heltec WIFI Lora 32 v2 */
+#define RFM95_RST     14   // "A" - LoRa_RST
+#define RFM95_CS      18   // "B" - LoRa_CS
+#define RFM95_INT     26   // "C" - LoRa_DIO0
+
+
 // Change to 434.0 or other frequency, must match RX's freq!
 #define RF95_FREQ 915.0
 
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-// Blink LED on packet receipt (Adafruit M0 here)
-#define LED 13
+// Blink LED on packet receipt 
+// #define LED 13   // (Adafruit M0 here)
+#define LED 25      // Heltec WIFI_LoRa 32 v2
  
-
 int16_t rxCount = 0;                                        // packet counter
 uint8_t rxBuffer[RH_RF95_MAX_MESSAGE_LEN];                  // receive buffer
 uint8_t rxRecvLen;                                          // number of bytes actually received
@@ -87,7 +94,7 @@ void setup()
     Serial.begin(9600);
     delay(100);
 
-  Serial.print("Feather LoRa Network Probe [Mode=");
+  Serial.print("Heltec LoRa Network Probe [Mode=");
   Serial.print(mode == verbose ? "verbose" : "delimeted");
   Serial.println("]");
   
